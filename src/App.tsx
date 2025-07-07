@@ -136,9 +136,28 @@ function App() {
         </div>
       </header>
 
-      {/* Terminal Value Method Selector */}
-      <div className="card" style={{ marginTop: 0, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 24, justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div className="card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <h2>Scenarios</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
+            <button 
+              className="button secondary" 
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              style={{ fontSize: '14px', padding: '8px 16px' }}
+            >
+              {showAdvanced ? 'Hide' : 'Show'} Advanced Settings
+            </button>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '12px', color: '#666', marginBottom: '4px' }}>+ Scenario</div>
+              <button className="button" onClick={addScenario} style={{ fontSize: '18px', width: '40px', height: '40px', borderRadius: '50%', padding: '0' }}>
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Terminal Value Method Selector */}
+        <div style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 16 }}>
           <span style={{ fontWeight: 500 }}>Terminal Value Method:</span>
           <select
             value={terminalMethod}
@@ -177,7 +196,7 @@ function App() {
           )}
         </div>
         {terminalMethod === 'multiple' && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
             <span>Type:</span>
             <select
               value={exitMultipleType}
@@ -200,27 +219,6 @@ function App() {
             <span style={{ minWidth: 40, textAlign: 'center' }}>{exitMultiple}x</span>
           </div>
         )}
-      </div>
-
-      <div className="card">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2>Scenarios</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
-            <button 
-              className="button secondary" 
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              style={{ fontSize: '14px', padding: '8px 16px' }}
-            >
-              {showAdvanced ? 'Hide' : 'Show'} Advanced Settings
-            </button>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#666', marginBottom: '4px' }}>+ Scenario</div>
-              <button className="button" onClick={addScenario} style={{ fontSize: '18px', width: '40px', height: '40px', borderRadius: '50%', padding: '0' }}>
-                +
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* Advanced Settings Explanation Chat Box */}
         {showAdvanced && (
