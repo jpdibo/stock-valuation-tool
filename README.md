@@ -29,7 +29,7 @@ A user-friendly DCF (Discounted Cash Flow) analysis tool for retail investors, f
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/stock-valuation-tool.git
+   git clone https://github.com/jpdibo/stock-valuation-tool.git
    cd stock-valuation-tool
    ```
 
