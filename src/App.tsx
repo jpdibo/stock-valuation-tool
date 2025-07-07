@@ -29,7 +29,11 @@ const CONSENSUS = {
 };
 const HISTORICAL = {
   revenueGrowthCAGR: 6.2,
-  operatingProfitMargin: 13.1
+  operatingProfitMargin: 13.1,
+  capexIntensity: 7.9,
+  workingCapitalIntensity: 11.5,
+  taxRate: 24.5,
+  terminalGrowthRate: 2.2
 };
 
 const DEFAULT_SCENARIOS: Scenario[] = [

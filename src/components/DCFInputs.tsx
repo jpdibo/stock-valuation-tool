@@ -27,7 +27,8 @@ const InputWithSlider = ({
   sliderConfig,
   consensus,
   historical,
-  tooltip
+  tooltip,
+  showConsensus = true
 }: {
   label: string;
   id: string;
@@ -37,6 +38,7 @@ const InputWithSlider = ({
   consensus?: number;
   historical?: number;
   tooltip?: string;
+  showConsensus?: boolean;
 }) => (
   <div className="input-group">
     <label htmlFor={id}>
@@ -78,9 +80,11 @@ const InputWithSlider = ({
       />
       <span style={{ width: 40, textAlign: 'right', fontSize: 12 }}>{value.toFixed(1)}%</span>
     </div>
-    <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>
-      Consensus: {consensus}%{historical !== undefined ? ` | 5y hist. avg: ${historical}%` : ''}
-    </div>
+    {showConsensus && (
+      <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>
+        Consensus: {consensus}%{historical !== undefined ? ` | 5y hist. avg: ${historical}%` : ''}
+      </div>
+    )}
   </div>
 );
 
@@ -115,8 +119,8 @@ const DCFInputs: React.FC<DCFInputsProps> = ({ assumptions, showAdvanced, onChan
           value={assumptions.discountRate}
           onChange={v => onChange('discountRate', v)}
           sliderConfig={SLIDER_CONFIG.discountRate}
-          consensus={consensus.discountRate}
           tooltip="How much we reduce future profits to account for risk and time. Higher rates mean we value future profits less. Typically based on the company's cost of capital."
+          showConsensus={false}
         />
         <InputWithSlider
           label="Capital Spending (% of Sales)"
@@ -125,6 +129,7 @@ const DCFInputs: React.FC<DCFInputsProps> = ({ assumptions, showAdvanced, onChan
           onChange={v => onChange('capexIntensity', v)}
           sliderConfig={SLIDER_CONFIG.capexIntensity}
           consensus={consensus.capexIntensity}
+          historical={historical.capexIntensity}
           tooltip="How much the company spends on equipment, buildings, and other long-term investments as a percentage of sales. Higher spending means less cash available for shareholders."
         />
         <InputWithSlider
@@ -134,6 +139,7 @@ const DCFInputs: React.FC<DCFInputsProps> = ({ assumptions, showAdvanced, onChan
           onChange={v => onChange('workingCapitalIntensity', v)}
           sliderConfig={SLIDER_CONFIG.workingCapitalIntensity}
           consensus={consensus.workingCapitalIntensity}
+          historical={historical.workingCapitalIntensity}
           tooltip="Cash the company needs to keep for day-to-day operations (inventory, receivables, etc.) as a percentage of sales. Higher needs mean less cash available."
         />
         <InputWithSlider
@@ -143,6 +149,7 @@ const DCFInputs: React.FC<DCFInputsProps> = ({ assumptions, showAdvanced, onChan
           onChange={v => onChange('taxRate', v)}
           sliderConfig={SLIDER_CONFIG.taxRate}
           consensus={consensus.taxRate}
+          historical={historical.taxRate}
           tooltip="The effective corporate tax rate the company pays on its profits. Lower tax rates mean more profit stays with the company."
         />
         <InputWithSlider
@@ -152,6 +159,7 @@ const DCFInputs: React.FC<DCFInputsProps> = ({ assumptions, showAdvanced, onChan
           onChange={v => onChange('terminalGrowthRate', v)}
           sliderConfig={SLIDER_CONFIG.terminalGrowthRate}
           consensus={consensus.terminalGrowthRate}
+          historical={historical.terminalGrowthRate}
           tooltip="How fast the company is expected to grow forever after the 5-year forecast. Should be conservative and typically below GDP growth (2-3%)."
         />
       </>}
